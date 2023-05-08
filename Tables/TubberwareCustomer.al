@@ -1,4 +1,4 @@
-table 50101 TubberwareCustomer
+table 50301 TubberwareCustomer
 {
     Caption = 'Customer';
     DataClassification = ToBeClassified;

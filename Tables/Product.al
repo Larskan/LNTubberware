@@ -1,4 +1,4 @@
-table 50100 Product
+table 50300 Product
 {
     Caption = 'Product';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-codeunit 50102 WebJasonConvertor
+codeunit 50200 JsonConverter
 {
 
     procedure ConnectWithUrl(urlInd: Text): HttpResponseMessage

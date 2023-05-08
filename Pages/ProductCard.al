@@ -1,4 +1,4 @@
-page 50100 ProductCard
+page 50200 ProductCard
 {
     ApplicationArea = All;
     Caption = 'ProductCard';

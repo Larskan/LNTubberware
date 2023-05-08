@@ -1,11 +1,11 @@
-codeunit 50101 NewCustomerCreation
+codeunit 50201 NewCustomerCreation
 {
     TableNo = TubberwareCustomer;
 
     procedure AddCustomer(response: text) result: Boolean
     var
         TubberwareCustomer: Record TubberwareCustomer;
-        jsonConverter: Codeunit 50102;
+        jsonConverter: Codeunit 50200;
         JObject: JsonObject;
         JToken: JsonToken;
         CustomerName: Text;

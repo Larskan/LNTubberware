@@ -2,7 +2,7 @@
 // https://docs.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/methods-auto/httpcontent/httpcontent-data-type
 //Nicolai et AL 2020
 
-codeunit 50150 WooService
+codeunit 50250 WooCommerceService
 {
     var
         Client: HttpClient;

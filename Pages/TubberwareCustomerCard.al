@@ -1,10 +1,10 @@
-page 50101 TubberwareCustomerCard
+page 50201 TubberwareCustomerCard
 {
     ApplicationArea = All;
     Caption = 'TubberwareCustomerCard';
     PageType = Card;
     SourceTable = TubberwareCustomer;
-    
+
     layout
     {
         area(content)
@@ -12,7 +12,7 @@ page 50101 TubberwareCustomerCard
             group(General)
             {
                 Caption = 'General';
-                
+
                 field(CustomerID; Rec.CustomerID)
                 {
                     ToolTip = 'Specifies the value of the CustomerID field.';
