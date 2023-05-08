@@ -22,10 +22,10 @@ Req: When customer is created in WooCommerce, customer must be created in Dynami
 
 --- Completed ---
 ReportReq: System Sequence Diagram demonstrating action order - Double check when done with project
+Req: If stock is changed, it must be reflected in WooCommerce
+Req: Add 5 different products and include a guide to Nico
 
 --- Lars Current TODO ---
-Req: Add 5 different products and include a guide to Nico
-Req: If stock is changed, it must be reflected in WooCommerce
 Req: When a customer buys products, a sales order must be created in Dynamics
 DynamicsReq: Product name must be shown as a tooltip in Dynamics
 

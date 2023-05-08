@@ -17,6 +17,11 @@ pageextension 50230 ExtendNavigationArea extends "Order Processor Role Center"
                     RunObject = page ProductCard;
                     ApplicationArea = All;
                 }
+                action("TubberCustomer")
+                {
+                    RunObject = page TubberwareCustomerCard;
+                    ApplicationArea = All;
+                }
             }
         }
     }
