@@ -2,17 +2,16 @@ page 50201 TubberwareCustomerCard
 {
     ApplicationArea = All;
     Caption = 'TubberwareCustomerCard';
-    PageType = Card;
+    PageType = List;
     SourceTable = TubberwareCustomer;
+    UsageCategory = Lists;
 
     layout
     {
         area(content)
         {
-            group(General)
+            repeater(General)
             {
-                Caption = 'General';
-
                 field(CustomerID; Rec.CustomerID)
                 {
                     ToolTip = 'Specifies the value of the CustomerID field.';

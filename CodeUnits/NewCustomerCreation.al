@@ -17,7 +17,7 @@ codeunit 50201 NewCustomerCreation
         IdText := jsonConverter.getFileIdTextAsText(JObject, 'ID');
         Evaluate(IdValue, IdText);
         JObject.Get('Cus', JToken);
-        CustomerName := jsonConverter.getFileIdTextAsText(JToken.AsObject(), 'CustomerName');
+        CustomerName := jsonConverter.getFileIdTextAsText(JToken.AsObject(), 'CustomerMail');
         TubberwareCustomer.CustomerID := IdValue;
         TubberwareCustomer.CustomerName := CustomerName;
         TubberwareCustomer.CustomerMail := Mail;
