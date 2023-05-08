@@ -17,12 +17,13 @@ Req: Architectural diagram showing main building blocks and connectors
 Req: Code snippets of interesting pieces of code, and text explaining the purpose
 Req: GIT Link
 
---- Completed ---
+--- Need Testing ---
+Req: When customer is created in WooCommerce, customer must be created in Dynamics
 
+--- Completed ---
+ReportReq: System Sequence Diagram demonstrating action order - Double check when done with project
 
 --- Lars Current TODO ---
-ReportReq: System Sequence Diagram demonstrating action order
-Req: When customer is created in WooCommerce, customer must be created in Dynamics
 Req: Add 5 different products and include a guide to Nico
 Req: If stock is changed, it must be reflected in WooCommerce
 Req: When a customer buys products, a sales order must be created in Dynamics
