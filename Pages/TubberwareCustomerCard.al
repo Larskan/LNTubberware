@@ -12,17 +12,18 @@ page 50201 TubberwareCustomerCard
         {
             repeater(General)
             {
-                field(CustomerID; Rec.CustomerID)
-                {
-                    ToolTip = 'Specifies the value of the CustomerID field.';
-                }
+                field(CustomerID; Rec.CustomerID) { ToolTip = 'ID'; }
                 field(CustomerName; Rec.CustomerName)
                 {
-                    ToolTip = 'Specifies the value of the CustomerName field.';
+                    ToolTip = 'First Name';
+                }
+                field(CustomerLastName; Rec.CustomerLastName)
+                {
+                    ToolTip = 'Last Name';
                 }
                 field(CustomerMail; Rec.CustomerMail)
                 {
-                    ToolTip = 'Specifies the value of the CustomerMail field.';
+                    ToolTip = 'Mail';
                 }
             }
         }

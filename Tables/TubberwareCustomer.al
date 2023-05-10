@@ -7,17 +7,23 @@ table 50301 TubberwareCustomer
     {
         field(1; CustomerID; Integer)
         {
-            Caption = 'CustomerID';
+            Caption = 'ID';
             DataClassification = ToBeClassified;
+            AutoIncrement = true;
         }
         field(10; CustomerName; Text[200])
         {
-            Caption = 'CustomerName';
+            Caption = 'First Name';
             DataClassification = ToBeClassified;
         }
-        field(20; CustomerMail; Text[200])
+        field(20; CustomerLastName; Text[100])
         {
-            Caption = 'CustomerMail';
+            Caption = 'Last Name';
+            DataClassification = ToBeClassified;
+        }
+        field(30; CustomerMail; Text[200])
+        {
+            Caption = 'Mail';
             DataClassification = ToBeClassified;
         }
     }

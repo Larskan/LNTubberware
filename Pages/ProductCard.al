@@ -26,6 +26,13 @@ page 50200 ProductCard
                     ToolTip = 'Specifies the value of the ProductPrice field.';
                 }
             }
+
         }
+
     }
+
+
+
+
 }
+
