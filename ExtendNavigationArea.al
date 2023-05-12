@@ -7,19 +7,24 @@ pageextension 50230 ExtendNavigationArea extends "Order Processor Role Center"
         {
             group("Tubberware")
             {
-                action("Mails")
+                action("Item Card")
                 {
-                    //RunObject = page ProjectDocument;
-                    //ApplicationArea = All;
-                }
-                action("Products")
-                {
-                    RunObject = page ProductCard;
+                    RunObject = page "Item List";
                     ApplicationArea = All;
                 }
-                action("TubberCustomer")
+                action("Customer Card")
                 {
-                    RunObject = page TubberwareCustomerCard;
+                    RunObject = page "Customer Card";
+                    ApplicationArea = All;
+                }
+                action("Customer List")
+                {
+                    RunObject = page "Customer List";
+                    ApplicationArea = All;
+                }
+                action("Web Services")
+                {
+                    RunObject = page "Web Services";
                     ApplicationArea = All;
                 }
             }

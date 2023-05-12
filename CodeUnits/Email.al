@@ -1,8 +1,11 @@
+
+//Code from earlier project, has not been tested
 codeunit 50205 EmailController
 {
-    procedure NewCustomerEmail(CusID: Code[20])
+    //Task: Send a welcome mail from Dynamics to new the customers.
+    procedure NewCustomerEmail(CustomerID: Code[20])
     var
-        CustomerTable: Record TubberwareCustomer;
+        CustomerTable: Record Customer;
         Email: Codeunit Email;
         EmailMessage: Codeunit "Email Message";
         Subject: Text;
@@ -10,7 +13,7 @@ codeunit 50205 EmailController
         Receiver: Text;
         Character: Char;
     begin
-        CustomerTable.SetFilter(CustomerID, CusID);
+        CustomerTable.SetFilter("No.", CustomerID);
         Receiver := 'ninusjunk@outlook.com';
         Subject := 'Welcome to EpicShop';
         Body := '';
@@ -22,7 +25,8 @@ codeunit 50205 EmailController
         end;
     end;
 
-    procedure NewOrderEmail(orderID: Code[20])
+    //Task: Dynamics shall also mail an order confirmation to the customer
+    procedure NewOrderEmail(OrderID: Code[20])
     var
         OrderTable: Record "Sales Header";
         Email: Codeunit Email;
@@ -32,7 +36,7 @@ codeunit 50205 EmailController
         Receiver: Text;
         Character: Char;
     begin
-        OrderTable.SetFilter("No.", orderID);
+        OrderTable.SetFilter("No.", OrderID);
         Receiver := 'ninusjunk@outlook.com';
         Subject := 'Welcome to EpicShop';
         Body := '';

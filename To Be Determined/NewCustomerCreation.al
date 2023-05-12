@@ -1,10 +1,11 @@
 codeunit 50201 NewCustomerCreation
 {
-    TableNo = TubberwareCustomer;
+    //this is outdated code, move it to WebConnect in a new procedure/rewrite it
+    //TableNo = TubberwareCustomer;
 
     procedure AddCustomer(response: text) result: Boolean
     var
-        TubberwareCustomer: Record TubberwareCustomer;
+        //TubberwareCustomer: Record TubberwareCustomer;
         jsonConverter: Codeunit 50200;
         JObject: JsonObject;
         JToken: JsonToken;
@@ -21,12 +22,12 @@ codeunit 50201 NewCustomerCreation
         CustomerName := jsonConverter.getFileIdTextAsText(JToken.AsObject(), 'CustomerName');
         CustomerLastName := jsonConverter.getFileIdTextAsText(JToken.AsObject(), 'CustomerLastName');
         Mail := jsonConverter.getFileIdTextAsText(JToken.AsObject(), 'CustomerMail');
-        TubberwareCustomer.CustomerID := IdValue;
-        TubberwareCustomer.CustomerName := CustomerName;
-        TubberwareCustomer.CustomerLastName := CustomerLastName;
-        TubberwareCustomer.CustomerMail := Mail;
+        //TubberwareCustomer.CustomerID := IdValue;
+        //TubberwareCustomer.CustomerName := CustomerName;
+        // TubberwareCustomer.CustomerLastName := CustomerLastName;
+        //TubberwareCustomer.CustomerMail := Mail;
         Message(Mail);
-        TubberwareCustomer.Insert();
+        // TubberwareCustomer.Insert();
         result := true;
     end;
 
