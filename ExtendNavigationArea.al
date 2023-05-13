@@ -27,6 +27,16 @@ pageextension 50230 ExtendNavigationArea extends "Order Processor Role Center"
                     RunObject = page "Web Services";
                     ApplicationArea = All;
                 }
+                action("Sales Order List")
+                {
+                    RunObject = page "Sales Order List";
+                    ApplicationArea = All;
+                }
+                action("Inventory")
+                {
+                    RunObject = page "Item Journal";
+                    ApplicationArea = All;
+                }
             }
         }
     }
