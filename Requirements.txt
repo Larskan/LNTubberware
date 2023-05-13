@@ -1,8 +1,7 @@
 slim frontend
 
 Req: When a product is added to Dynamics it must be possible to export it to WooCommerce
-Req: Send a welcome mail from Dynamics to new customers
-Req: Dynamics shall also mail an order confirmation to customer
+
 
 Dynamics:
 Req: Chart that show the five most sold products for last week and on which day they were sold
@@ -30,3 +29,6 @@ Req: When a customer buys products, a sales order must be created in Dynamics
 DynamicsReq: Product name must be shown as a tooltip in Dynamics
 
 --- Nico Current TODO ---
+
+Req: Send a welcome mail from Dynamics to new customers
+Req: Dynamics shall also mail an order confirmation to customer
