@@ -1,35 +1,27 @@
-/*
+
 codeunit 50304 "Email Unit"
 {
-    procedure SendWelcome(Receiver: Text)
+    procedure SendWelcome(customer: code[20])
     var
         EmailMessage: Codeunit "Email Message";
     begin
-        EmailMessage.Create(Receiver, 'Welcome to Tupper', 'Du er customer hos LN|Tupper!');
-        Email.Send(EmailMessage, "Email Scenario"::"NewTupperCustomer")
+        EmailMessage.Create(customer, 'Welcome to Tupper', 'Du er customer hos LN|Tupper!');
+        Email.Send(EmailMessage, "Email Scenario"::"New Customer")
     end;
 
-    procedure SendOrderConfirmation(Receiver: Text)
+    procedure SendOrderConfirmation(customer: code[20])
     var
-        EmailMessage: Codeunit "Email MEssage";
+        CustomerTable: Record Customer;
+        EmailMessage: Codeunit "Email Message";
     begin
-        EmailMEssage.Create(Receiver, 'Tupper Confirmation', 'Du har bestilt hos LN|Tupper!');
-        Email.Send(EmailMessage, "Email Scenario"::"NewTupperOrder")
+        CustomerTable.SetFilter("No.", customer);
+        CustomerTable.FindFirst();
+        customer := CustomerTable."E-Mail";
+
+        EmailMEssage.Create(customer, 'Tupper Confirmation', 'Du har bestilt hos LN|Tupper!');
+        Email.Send(EmailMessage, "Email Scenario"::"Order Creation")
     end;
 
     var
         Email: Codeunit Email;
 }
-
-enumextension 50305 "Tupper Email Scenarios" extends "Email Scenario"
-{
-    value(50306; "New Order")
-    {
-        Caption = 'New Order';
-    }
-    value(50307; "New Customer")
-    {
-        Caption = 'New Customer';
-    }
-}
-*/

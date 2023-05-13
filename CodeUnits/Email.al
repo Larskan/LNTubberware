@@ -33,7 +33,7 @@ codeunit 50205 EmailController
     end;
 
     //Task: Dynamics shall also mail an order confirmation to the customer
-    procedure NewOrderEmail(OrderID: Code[20])
+    //procedure NewOrderEmail(OrderID: Code[20])
 
 }
 
