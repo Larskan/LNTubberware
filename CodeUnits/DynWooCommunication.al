@@ -46,11 +46,11 @@ codeunit 50203 ToWoocommerce
 
             ItemTable.CalcFields(Inventory);
             //Populate JsonObject with items name, price, description and Stock
-            JsonBody.Add('name', ItemTable.Description);//Description
-            JsonBody.Add('regular_price', Format(ItemTable."Unit Price"));//Unit_Price
-            JsonBody.Add('description', ItemTable.ItemDescription);//Item_Description
-            JsonBody.Add('manage_stock', true);//Inventory_Management
-            JsonBody.Add('stock_quantity', Format(ItemTable.Inventory));//Inventory
+            JsonBody.Add('name', ItemTable.Description);
+            JsonBody.Add('regular_price', Format(ItemTable."Unit Price"));
+            JsonBody.Add('description', ItemTable.ItemDescription);
+            JsonBody.Add('manage_stock', true);
+            JsonBody.Add('stock_quantity', Format(ItemTable.Inventory));
             JsonBody.WriteTo(sender);
             Content.WriteFrom(sender);
             Content.GetHeaders(contentHeaders);
@@ -318,7 +318,7 @@ codeunit 50204 FromWoocommerce
 
         OrderDate := JsonConverter.getFileIdTextAsText(JsonBody, 'date_created');
         OrderDate := CopyStr(OrderDate, 9, 2) + CopyStr(OrderDate, 6, 2) + CopyStr(OrderDate, 1, 4);
-        Evaluate(TypeDate, '01-01-2023');
+        Evaluate(TypeDate, '13-05-2023');
 
         SalesHeaderRecord."Order Date" := TypeDate;
         SalesHeaderRecord."Posting Date" := TypeDate;
