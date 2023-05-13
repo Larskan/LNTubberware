@@ -5,7 +5,7 @@ pageextension 50230 ExtendNavigationArea extends "Order Processor Role Center"
     {
         addlast(sections)
         {
-            group("Tubberware")
+            group("Tupperware")
             {
                 action("Item Card")
                 {
@@ -32,7 +32,7 @@ pageextension 50230 ExtendNavigationArea extends "Order Processor Role Center"
                     RunObject = page "Sales Order List";
                     ApplicationArea = All;
                 }
-                action("Inventory")
+                action("Item Journal")
                 {
                     RunObject = page "Item Journal";
                     ApplicationArea = All;

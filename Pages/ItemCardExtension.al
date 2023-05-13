@@ -11,12 +11,12 @@ pageextension 50109 ItemCardExtension extends "Item Card"
                 MultiLine = true;
                 Width = 200;
             }
-            field(WooCommerceID; Rec.WooCommerceID)
-            {
-                Caption = 'WooCommerce ID';
-                MultiLine = true;
-                Width = 100;
-            }
+            //field(WooCommerceID; Rec.WooCommerceID)
+            //{
+            // Caption = 'WooCommerce ID';
+            // MultiLine = true;
+            // Width = 100;
+            //  }
         }
     }
 

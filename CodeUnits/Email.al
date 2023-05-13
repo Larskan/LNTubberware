@@ -3,7 +3,8 @@
 codeunit 50205 EmailDefinition
 {
     //Task: Send a welcome mail from Dynamics to new the customers.
-    procedure NewCustomerEmail(customerID: Code[20])
+    //This is the mails themselves
+    procedure NewCustomerEmail(customerId: Code[20])
     var
         CustomerTable: Record Customer;
         Email: Codeunit Email;
@@ -13,12 +14,14 @@ codeunit 50205 EmailDefinition
         Receiver: Text;
         Character: Char;
     begin
-        CustomerTable.SetFilter("No.", customerID);
+        CustomerTable.SetFilter("No.", customerId);
         CustomerTable.FindFirst();
         //Receiver := 'heinotestmail@gmail.com'; //- For testing
         Receiver := CustomerTable."E-Mail";
-        Subject := 'Welcome to EpicShop';
         Character := 13; //Line shift
+
+        Subject := 'Welcome to EpicShop';
+
 
         Body := 'Greetings' + CustomerTable.Name + Format(Character) + Format(Character)
         + 'Welcome to EpicShop' + Format(Character)
@@ -34,7 +37,8 @@ codeunit 50205 EmailDefinition
     end;
 
     //Task: Dynamics shall also mail an order confirmation to the customer
-    procedure NewOrderEmail(orderID: Code[20])
+    //This is the mails themselves
+    procedure NewOrderEmail(orderId: Code[20])
     var
         OrderTable: Record "Sales Header";
         CustomerTable: Record Customer;
@@ -46,15 +50,16 @@ codeunit 50205 EmailDefinition
         Receiver: Text;
         Character: Char;
     begin
-        OrderTable.SetFilter("No.", orderID);
+        OrderTable.SetFilter("No.", orderId);
         OrderTable.FindFirst();
         SalesLineTable.SetFilter("Document No.", OrderTable."No.");
         CustomerTable.SetFilter("No.", OrderTable."Bill-to Customer No.");
         CustomerTable.FindFirst();
-        Receiver := 'heinotestmail@gmail.com'; //- for testing
-        //Receiver := CustomerTable."E-Mail";
-        Subject := 'Thanks for shopping!';
+        //Receiver := 'heinotestmail@gmail.com'; //- for testing
         Character := 13; //Line shift, Format(Character)
+        Receiver := CustomerTable."E-Mail";
+
+        Subject := 'Thanks for shopping!';
 
         Body := 'Greetings.' + CustomerTable.Name + Format(Character) + Format(Character)
         + 'Thank you for shopping in EpicShop' + Format(Character)

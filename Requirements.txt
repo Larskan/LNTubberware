@@ -21,7 +21,6 @@ Req: Chart that show the five most sold products for last week and on which day 
 Req: If user clicks on chart item, then drill down and show the product on the item card
 
 --- Lars Need Testing ---
-Req: When customer is created in WooCommerce, customer must be created in Dynamics
 Req: If stock is changed, it must be reflected in WooCommerce
 
 --- Nico Need Testing ---
@@ -31,3 +30,4 @@ Req: If stock is changed, it must be reflected in WooCommerce
 ReportReq: System Sequence Diagram demonstrating action order - Double check when done with project
 Req: Add 5 different products and include a guide to Nico
 Req: When a product is added to Dynamics it must be possible to export it to WooCommerce
+Req: When customer is created in WooCommerce, customer must be created in Dynamics
