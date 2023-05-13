@@ -6,6 +6,7 @@ codeunit 50201 NewCustomerCreation
     procedure AddCustomer(response: text) result: Boolean
     var
         //TubberwareCustomer: Record TubberwareCustomer;
+        Emailunit: Codeunit 50304;
         jsonConverter: Codeunit 50200;
         JObject: JsonObject;
         JToken: JsonToken;
@@ -27,8 +28,11 @@ codeunit 50201 NewCustomerCreation
         // TubberwareCustomer.CustomerLastName := CustomerLastName;
         //TubberwareCustomer.CustomerMail := Mail;
         Message(Mail);
-        // TubberwareCustomer.Insert();
+        //TubberwareCustomer.Insert(true);
         result := true;
+        Emailunit.SendWelcome(Mail);
+
+
     end;
 
     //Calls AddCustomer procedure
