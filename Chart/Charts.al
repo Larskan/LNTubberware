@@ -78,52 +78,52 @@ page 50340 "Chart"
                         repeat
                             if j >= 5 then // how many results do we want 
                                 break;
-                            Product.CalcFields("Mon sales");
-                            if Product."Mon sales" <> 0 then begin
+                            Product.CalcFields("Monday Sales");
+                            if Product."Monday Sales" <> 0 then begin
                                 Buffer.AddColumn(Product.Name);
-                                Buffer.SetValueByIndex(0, i, Product."Mon sales");
+                                Buffer.SetValueByIndex(0, i, Product."Monday Sales");
                                 i += 1;
                             end;
 
-                            Product.CalcFields("Tue sales");
-                            if Product."Tue sales" <> 0 then begin
+                            Product.CalcFields("Tuesday Sales");
+                            if Product."Tuesday Sales" <> 0 then begin
                                 Buffer.AddColumn(Product.Name);
-                                Buffer.SetValueByIndex(1, i, Product."Tue sales");
+                                Buffer.SetValueByIndex(1, i, Product."Tuesday Sales");
                                 i += 1;
                             end;
 
-                            Product.CalcFields("Wed sales");
-                            if Product."Wed sales" <> 0 then begin
+                            Product.CalcFields("Wednesday Sales");
+                            if Product."Wednesday Sales" <> 0 then begin
                                 Buffer.AddColumn(Product.Name);
-                                Buffer.SetValueByIndex(2, i, Product."Wed sales");
+                                Buffer.SetValueByIndex(2, i, Product."Wednesday Sales");
                                 i += 1;
                             end;
 
-                            Product.CalcFields("Thu sales");
-                            if Product."Thu sales" <> 0 then begin
+                            Product.CalcFields("Thursday Sales");
+                            if Product."Thursday Sales" <> 0 then begin
                                 Buffer.AddColumn(Product.Name);
-                                Buffer.SetValueByIndex(3, i, Product."Thu sales");
+                                Buffer.SetValueByIndex(3, i, Product."Thursday Sales");
                                 i += 1;
                             end;
 
-                            Product.CalcFields("Fri sales");
-                            if Product."Fri sales" <> 0 then begin
+                            Product.CalcFields("Friday Sales");
+                            if Product."Friday Sales" <> 0 then begin
                                 Buffer.AddColumn(Product.Name);
-                                Buffer.SetValueByIndex(4, i, Product."Fri sales");
+                                Buffer.SetValueByIndex(4, i, Product."Friday Sales");
                                 i += 1;
                             end;
 
-                            Product.CalcFields("Sat sales");
-                            if Product."Sat sales" <> 0 then begin
+                            Product.CalcFields("Saturday Sales");
+                            if Product."Saturday Sales" <> 0 then begin
                                 Buffer.AddColumn(Product.Name);
-                                Buffer.SetValueByIndex(5, i, Product."Sat sales");
+                                Buffer.SetValueByIndex(5, i, Product."Saturday Sales");
                                 i += 1;
                             end;
 
-                            Product.CalcFields("Sun sales");
-                            if Product."Sun sales" <> 0 then begin
+                            Product.CalcFields("Sunday sales");
+                            if Product."Sunday sales" <> 0 then begin
                                 Buffer.AddColumn(Product.Name);
-                                Buffer.SetValueByIndex(6, i, Product."Sun sales");
+                                Buffer.SetValueByIndex(6, i, Product."Sunday Sales");
                                 i += 1;
                             end;
 
