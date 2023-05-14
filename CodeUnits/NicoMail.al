@@ -24,7 +24,7 @@ codeunit 50304 "Email Unit"
         customer := CustomerTable."E-Mail";
 
         EmailMessage.Create(customer, 'Tupper Confirmation', 'Du har bestilt hos LN|Tupper!');
-        Email.Send(EmailMessage, "Email Scenario"::"Create Order")
+        Email.Send(EmailMessage, "Email Scenario"::"Order Creation")
     end;
 
     var
