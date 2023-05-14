@@ -21,7 +21,7 @@ codeunit 50205 EmailDefinition
         Character := 13; //Line shift
 
 
-        Body := 'Greetings' + CustomerTable.Name + Format(Character) + Format(Character)
+        Body := 'Greetings ' + CustomerTable.Name + Format(Character) + Format(Character)
         + 'Welcome to EpicShop' + Format(Character)
         + 'Hope you enjoy our shop and have a good experience' + Format(Character)
         + 'Best Regards' + Format(Character)
@@ -58,7 +58,7 @@ codeunit 50205 EmailDefinition
 
         Subject := 'Thanks for shopping!';
 
-        Body := 'Greetings.' + CustomerTable.Name + Format(Character) + Format(Character)
+        Body := 'Greetings ' + CustomerTable.Name + Format(Character) + Format(Character)
         + 'Thank you for shopping in EpicShop' + Format(Character)
         + 'Your Order: ' + Format(Character);
 
@@ -66,13 +66,13 @@ codeunit 50205 EmailDefinition
         if SalesLineTable.FindSet() then
             repeat
                 Body += 'Item: ' + SalesLineTable.Description
-                + ' | Amount: ' + Format(SalesLineTable.Quantity)
-                + ' | Price: ' + Format(SalesLineTable."Line Amount") + Format(Character);
+                        + ' | Amount: ' + Format(SalesLineTable.Quantity)
+                        + ' | Price: ' + Format(SalesLineTable."Line Amount") + Format(Character);
             until SalesLineTable.Next() = 0;
 
         Body := 'Please come again!' + Format(Character)
-        + 'Best Regards' + Format(Character)
-        + 'CEO of EpicShop';
+                + 'Best Regards' + Format(Character)
+                + 'CEO of EpicShop';
 
         if not (Body = '') then begin
             EmailMessage.Create(Receiver, Subject, Body);

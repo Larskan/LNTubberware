@@ -23,14 +23,11 @@ codeunit 50203 ToWoocommerce
         ck: Text;
         cs: Text;
     begin
-
-
         //Linking the consumer key and consumer secret together
         ck := 'ck_85a060bf066868da1c40742290aaf79986798d71';
         cs := 'cs_1c1aa151473eaaf6d085c48a0e30831abfd405cb';
         //StrSubstNo replaces % or # values with the key values
         authString := StrSubstNo('%1:%2', ck, cs);
-        //authString := StrSubstNo('ck_85a060bf066868da1c40742290aaf79986798d71:cs_1c1aa151473eaaf6d085c48a0e30831abfd405cb');
         authString := TypeHelper.ToBase64(authString);
         authString := StrSubstNo('Basic %1', authString);
 
@@ -56,8 +53,6 @@ codeunit 50203 ToWoocommerce
             client.DefaultRequestHeaders.Add('Authorization', authString);
             MyPCIP := '172.25.160.1:80'; //Change this to YOUR PC IP
 
-            //http://172.25.160.1:80/wordpress/wp-json/wc/v2/products
-            //IP: PC IP?172.25.160.1
             Client.Post('http://' + MyPCIP + '/wordpress/wp-json/wc/v2/products', Content, Response);
 
             //Extract ID of newly created Item from Response from WooCommerce API
@@ -121,7 +116,7 @@ codeunit 50203 ToWoocommerce
 //Communication from WooCommerce
 codeunit 50204 FromWoocommerce
 {
-    //Its important that the payload:Text has the same name as the public string within your Payload Class in API
+    //If Customer is created in WooCommerce, it also creates the Customer in Dynamics and sends Welcome Email
     procedure ProcessCreateCustomer(payload: Text) result: Boolean
     var
         CustomerTable: Record Customer;
@@ -194,7 +189,7 @@ codeunit 50204 FromWoocommerce
 
     end;
 
-    //Unfinished, finish it
+    //If an Order is created in WooCommerce, it creates a Sales Order in Dynamics and sends Confirmation Email
     procedure ProcessCreateSalesOrder(payload: Text)
     var
         SalesHeaderRecord: Record "Sales Header"; //For the Customer
@@ -218,12 +213,14 @@ codeunit 50204 FromWoocommerce
         wooCommerceIDTemporary: Code[20];
         counter: Integer;
         stringSplit: List of [Text];
+
+    //WooCommerce ID = 15 needs to be product_id = 15 - nope
     begin
         payload := payload.Replace('\r\n', '');
         payload := payload.Replace('\', '');
         stringSplit := payload.Split('avatar_url');
         endingTxt := DelChr(stringSplit.Get(1), '>', '"}}. "');
-        MainJson.ReadFrom(endingTxt + '}');
+        MainJson.ReadFrom(endingTxt + '}}');
 
         MainJson.Get('billing', CostJsonToken);
 
@@ -291,9 +288,8 @@ codeunit 50204 FromWoocommerce
 
             counter += 1;
         end;
-        //Email.NewOrderEmail(SalesHeaderRecord."No.");
+        Email.NewOrderEmail(SalesHeaderRecord."No.");
     end;
-
 }
 
 

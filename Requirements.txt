@@ -1,25 +1,23 @@
 
-Report:
-Technical description of solution and the decisions made. Max 20 pages
-
 ---------------------------------------------------------------------------------------------------------
 
 --- Lars Current TODO ---
 Req: Architectural diagram showing main building blocks and connectors
 Req: Code snippets of interesting pieces of code, and text explaining the purpose
+Report:Technical description of solution and the decisions made. Max 20 pages
 
 --- Nico Current TODO ---
 Req: Chart that show the five most sold products for last week and on which day they were sold
 Req: If user clicks on chart item, then drill down and show the product on the item card
 DynamicsReq: Product name must be shown as a tooltip in Dynamics
 Req: Code snippets of interesting pieces of code, and text explaining the purpose
+Report:Technical description of solution and the decisions made. Max 20 pages
 
 --- Lars Need Testing ---
-Req: When a customer buys products, a sales order must be created in Dynamics
-Req: Dynamics shall also mail an order confirmation to customer
 
 --- Nico Need Testing ---
 
+---------------------------------------------------------------------------------------------------------
 
 --- Completed ---
 ReportReq: System Sequence Diagram demonstrating action order - Double check when done with project
@@ -30,3 +28,5 @@ Req: GIT Link
 Req: Send a welcome mail from Dynamics to new customers
 Req: Physical shop later, so it must be possible to see on the Item List, if product is sold on web shop
 Req: If stock is changed, it must be reflected in WooCommerce
+Req: When a customer buys products, a sales order must be created in Dynamics
+Req: Dynamics shall also mail an order confirmation to customer
