@@ -11,12 +11,6 @@ pageextension 50109 ItemCardExtension extends "Item Card"
                 MultiLine = true;
                 Width = 200;
             }
-            //field(WooCommerceID; Rec.WooCommerceID)
-            //{
-            // Caption = 'WooCommerce ID';
-            // MultiLine = true;
-            // Width = 100;
-            //  }
         }
     }
 
@@ -26,7 +20,6 @@ pageextension 50109 ItemCardExtension extends "Item Card"
     {
         addlast(Functions)
         {
-
             //Task: When a product is added to Dynamics it must be possible to export it to WooCommerce
             action(WooCommerce)
             {
@@ -34,9 +27,9 @@ pageextension 50109 ItemCardExtension extends "Item Card"
                 PromotedOnly = true;
                 PromotedIsBig = true;
                 PromotedCategory = Process;
-                ApplicationArea = all;
+                ApplicationArea = Basic, Suite;
                 Caption = 'Upload to WooCommerce';
-                Image = UpdateDescription;
+                Image = UpdateShipment;
                 ToolTip = 'Uploads current item to WooCommerce';
 
                 trigger OnAction()
@@ -54,7 +47,7 @@ pageextension 50109 ItemCardExtension extends "Item Card"
                 PromotedOnly = true;
                 PromotedIsBig = true;
                 PromotedCategory = Process;
-                ApplicationArea = all;
+                ApplicationArea = Basic, Suite;
                 Caption = 'Update Item Stock to WooCommerce';
                 Image = UpdateShipment;
                 ToolTip = 'Uploads current item stock to WooCommerce';

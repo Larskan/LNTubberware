@@ -14,7 +14,7 @@ codeunit 50304 "Email Unit"
         EmailMessage: Codeunit "Email MEssage";
     begin
         EmailMEssage.Create(Receiver, 'Tupper Confirmation', 'Du har bestilt hos LN|Tupper!');
-        Email.Send(EmailMessage, "Email Scenario"::"Order Creation")
+        Email.Send(EmailMessage, "Email Scenario"::"Create Order")
     end;
 
     var

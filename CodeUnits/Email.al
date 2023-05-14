@@ -16,18 +16,17 @@ codeunit 50205 EmailDefinition
     begin
         CustomerTable.SetFilter("No.", customerId);
         CustomerTable.FindFirst();
-        //Receiver := 'heinotestmail@gmail.com'; //- For testing
         Receiver := CustomerTable."E-Mail";
-        Character := 13; //Line shift
 
         Subject := 'Welcome to EpicShop';
+        Character := 13; //Line shift
 
 
         Body := 'Greetings' + CustomerTable.Name + Format(Character) + Format(Character)
         + 'Welcome to EpicShop' + Format(Character)
         + 'Hope you enjoy our shop and have a good experience' + Format(Character)
         + 'Best Regards' + Format(Character)
-        + 'CEO of EpicShop' + Format(Character);
+        + 'CEO of EpicShop';
 
         //If Body is not empty
         if not (Body = '') then begin
@@ -55,8 +54,7 @@ codeunit 50205 EmailDefinition
         SalesLineTable.SetFilter("Document No.", OrderTable."No.");
         CustomerTable.SetFilter("No.", OrderTable."Bill-to Customer No.");
         CustomerTable.FindFirst();
-        //Receiver := 'heinotestmail@gmail.com'; //- for testing
-        Character := 13; //Line shift, Format(Character)
+        Character := 13; //Line shift
         Receiver := CustomerTable."E-Mail";
 
         Subject := 'Thanks for shopping!';
@@ -65,6 +63,7 @@ codeunit 50205 EmailDefinition
         + 'Thank you for shopping in EpicShop' + Format(Character)
         + 'Your Order: ' + Format(Character);
 
+        //Find all items within this order
         if SalesLineTable.FindSet() then
             repeat
                 Body += 'Item: ' + SalesLineTable.Description
@@ -74,20 +73,20 @@ codeunit 50205 EmailDefinition
 
         Body := 'Please come again!' + Format(Character)
         + 'Best Regards' + Format(Character)
-        + 'CEO of EpicShop' + Format(Character);
+        + 'CEO of EpicShop';
 
         if not (Body = '') then begin
             EmailMessage.Create(Receiver, Subject, Body);
-            Email.Send(EmailMessage, "Email Scenario"::"Order Creation");
+            Email.Send(EmailMessage, "Email Scenario"::"Create Order");
         end;
     end;
 }
 
 enumextension 50225 EmailScenarios extends "Email Scenario"
 {
-    value(50226; "Order Creation")
+    value(50226; "Create Order")
     {
-        Caption = 'Order Creation';
+        Caption = 'Create Order';
     }
     value(50227; "New Customer")
     {

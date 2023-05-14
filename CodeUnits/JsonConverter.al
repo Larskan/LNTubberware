@@ -4,7 +4,6 @@
 //3) Retrieve values from JsonObject based on field names
 codeunit 50200 JsonConverter
 {
-    //Takes URL input as returns HTTP Response object
     procedure ConnectWithUrl(urlIn: Text): HttpResponseMessage
     var
         Client: HttpClient;
@@ -27,39 +26,33 @@ codeunit 50200 JsonConverter
         end;
     end;
 
-    //Takes JsonObject and fieldname to return text of the fieldname
     procedure getFileIdTextAsText(JObject: JsonObject; Fieldname: Text): Text
     var
         returnVal: Text;
         JToken: JsonToken;
     begin
-        //GET retrieves value of fieldname
         if JObject.Get(Fieldname, JToken) then
-            //Converts the fieldname to text
             returnVal := JToken.AsValue().AsText();
         exit(returnVal);
     end;
 
-    //JsonObject+fieldname = JsonArray
-    procedure getFileIdTextAsJSArray(JObject: JsonObject; FildName: Text): JsonArray
+    procedure getFileIdTextAsJSArray(JObject: JsonObject; FieldName: Text): JsonArray
     var
         JtokenRatings: JsonToken;
         returnArry: JsonArray;
     begin
-        if JObject.Get(FildName, JtokenRatings) then begin
+        if JObject.Get(FieldName, JtokenRatings) then begin
             returnArry := JtokenRatings.AsArray();
             exit(returnArry);
         end;
     end;
 
-    //Takes HTTP Response and returns JsonObject
     procedure getBodyAsJsonObject(response: HttpResponseMessage): JsonObject
     var
         returnJObject: JsonObject;
         data: Text;
     begin
         if response.Content().ReadAs(data) then
-            //ReadFrom: Reads the Json data from the string
             returnJObject.ReadFrom(data);
         exit(returnJObject);
     end;

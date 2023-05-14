@@ -116,7 +116,6 @@ codeunit 50203 ToWoocommerce
 
 }
 
-
 //Communication from WooCommerce
 codeunit 50204 FromWoocommerce
 {
@@ -152,9 +151,9 @@ codeunit 50204 FromWoocommerce
 
             MainJson.Get('billing', BillingJsonText);
             CustomerTable.Address := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'address_1');
-            CustomerTable.City := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'city');
-            CustomerTable."Post Code" := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'postcode');
             CustomerTable.County := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'country'); //County is also a Country
+            CustomerTable."Post Code" := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'postcode');
+            CustomerTable.City := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'city');
             CustomerTable."Phone No." := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'phone');
 
             CustomerTable."Payment Method Code" := 'KONTANT';
@@ -164,6 +163,7 @@ codeunit 50204 FromWoocommerce
             CustomerTable.Insert();
 
             //Once inserted, now I can find them and send the welcome mail
+            //Filter the No. based on the matching id of the customer, then send the mail to that customer
             CustomerTable.SetFilter("No.", JsonConverter.getFileIdTextAsText(MainJson, 'id'));
             CustomerTable.FindFirst();
             Email.NewCustomerEmail(CustomerTable."No.");
@@ -177,9 +177,9 @@ codeunit 50204 FromWoocommerce
 
             MainJson.Get('billing', BillingJsonText);
             CustomerTable.Address := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'address_1');
-            CustomerTable.City := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'city');
-            CustomerTable."Post Code" := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'postcode');
             CustomerTable.County := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'country');
+            CustomerTable."Post Code" := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'postcode');
+            CustomerTable.City := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'city');
             CustomerTable."Phone No." := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'phone');
 
             CustomerTable."Payment Method Code" := 'KONTANT';
