@@ -7,10 +7,17 @@ tableextension 50158 ItemExtension extends Item
             Caption = 'Item Description';
             DataClassification = ToBeClassified;
         }
-        field(50160; WooCommerceID; Text[100])
+        field(50160; WooCommerceId; Text[100])
         {
             Caption = 'WooCommerce ID';
             DataClassification = ToBeClassified;
         }
+
+        field(50161; PhysicalOrWebshop; Text[100])
+        {
+            Caption = 'Physical or Webshop';
+            DataClassification = ToBeClassified;
+        }
+
     }
 }

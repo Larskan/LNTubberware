@@ -15,7 +15,6 @@ DynamicsReq: Product name must be shown as a tooltip in Dynamics
 Req: Code snippets of interesting pieces of code, and text explaining the purpose
 
 --- Lars Need Testing ---
-Req: If stock is changed, it must be reflected in WooCommerce
 Req: When a customer buys products, a sales order must be created in Dynamics
 Req: Dynamics shall also mail an order confirmation to customer
 
@@ -30,3 +29,4 @@ Req: When customer is created in WooCommerce, customer must be created in Dynami
 Req: GIT Link
 Req: Send a welcome mail from Dynamics to new customers
 Req: Physical shop later, so it must be possible to see on the Item List, if product is sold on web shop
+Req: If stock is changed, it must be reflected in WooCommerce

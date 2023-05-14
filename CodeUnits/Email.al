@@ -1,5 +1,4 @@
 
-//Code from earlier project, has not been tested
 codeunit 50205 EmailDefinition
 {
     //Task: Send a welcome mail from Dynamics to new the customers.

@@ -38,7 +38,7 @@ codeunit 50203 ToWoocommerce
         ItemTable.SetFilter("No.", itemId);
         ItemTable.FindFirst();
 
-        if (ItemTable.WooCommerceID = '') then begin
+        if (ItemTable.WooCommerceId = '') then begin
 
             ItemTable.CalcFields(Inventory);
             MainJson.Add('name', ItemTable.Description);
@@ -46,6 +46,7 @@ codeunit 50203 ToWoocommerce
             MainJson.Add('description', ItemTable.ItemDescription);
             MainJson.Add('manage_stock', true);
             MainJson.Add('stock_quantity', Format(ItemTable.Inventory));
+            //MainJson.Add('physical_web', Format(ItemTable.PhysicalOrWebshop)); //For location
             MainJson.WriteTo(sender);
 
             Content.WriteFrom(sender);
@@ -65,7 +66,7 @@ codeunit 50203 ToWoocommerce
             jsonObjResponse.ReadFrom(ResponseText);
 
             //Stores the extracted ID as WooCommerceID in Item Table
-            ItemTable.WooCommerceID := jsonConverter.getFileIdTextAsText(jsonObjResponse, 'id');
+            ItemTable.WooCommerceId := jsonConverter.getFileIdTextAsText(jsonObjResponse, 'id');
             //Save table with new ID
             ItemTable.Modify();
         end
@@ -74,7 +75,7 @@ codeunit 50203 ToWoocommerce
         end;
     end;
 
-    //Attempt at making stock update: Dyn -> Woo. Not tested
+    //Works
     procedure ProcessUpdateItemStock(itemId: Code[20])
     var
         ItemTable: Record Item;
@@ -87,12 +88,13 @@ codeunit 50203 ToWoocommerce
         AuthString: Text;
         Sender: Text;
         MyPCIP: Text;
-        ResponseText: Text;
-        jsonObjResponse: JsonObject;
-        JsonConverter: Codeunit JsonConverter;
+        ck: Text;
+        cs: Text;
     begin
-        MyPCIP := '172.25.160.1:80'; //Change this to PC Docker IP
-        AuthString := StrSubstNo('ck_85a060bf066868da1c40742290aaf79986798d71:%2:cs_1c1aa151473eaaf6d085c48a0e30831abfd405cb');
+        MyPCIP := '172.25.160.1:80'; //Change this to YOUR Ipv4 IP : xampp Port
+        ck := 'ck_85a060bf066868da1c40742290aaf79986798d71';
+        cs := 'cs_1c1aa151473eaaf6d085c48a0e30831abfd405cb';
+        AuthString := StrSubstNo('%1:%2', ck, cs);
         AuthString := TypeHelper.ToBase64(AuthString);
         AuthString := StrSubstNo('Basic %1', AuthString);
 
@@ -100,33 +102,18 @@ codeunit 50203 ToWoocommerce
         ItemTable.SetFilter("No.", itemId);
         ItemTable.FindFirst();
 
-        //If the WooID is the same as itemId
-        if (ItemTable.WooCommerceID = itemId) then begin
+        itemId := ItemTable.WooCommerceId;
+        ItemTable.CalcFields(Inventory);
+        MainJson.Add('manage_stock', true);
+        MainJson.Add('stock_quantity', Format(ItemTable.Inventory));
+        MainJson.WriteTo(sender);
 
-            ItemTable.CalcFields(Inventory);
-            MainJson.Add('manage_stock', true);
-            MainJson.Add('stock_quantity', Format(ItemTable.Inventory));
-            MainJson.WriteTo(sender);
-
-            Content.WriteFrom(sender);
-            Content.GetHeaders(contentHeaders);
-            contentHeaders.Clear();
-            contentHeaders.Add('Content-Type', 'application/json');
-            client.DefaultRequestHeaders.Add('Authorization', authString);
-            Client.Post('http://' + MyPCIP + '/wordpress/wp-json/wc/v2/products', Content, Response);
-
-            //Extract ID of Item from Response from WooCommerce API
-            Response.Content.ReadAs(ResponseText); //String and Json issues?
-            //Reads JSON data from ResponseText and stores it as Json Object
-            jsonObjResponse.ReadFrom(ResponseText);
-
-            //Stores the extracted ID as WooCommerceID in Item Table
-            ItemTable.WooCommerceID := jsonConverter.getFileIdTextAsText(jsonObjResponse, 'id');
-            //Save table with new ID
-            ItemTable.Modify();
-        end
-
-
+        Content.WriteFrom(sender);
+        Content.GetHeaders(contentHeaders);
+        contentHeaders.Clear();
+        contentHeaders.Add('Content-Type', 'application/json');
+        client.DefaultRequestHeaders.Add('Authorization', authString);
+        Client.Put('http://' + MyPCIP + '/wordpress/wp-json/wc/v2/products/' + itemId, Content, Response);
     end;
 
 }
@@ -287,7 +274,7 @@ codeunit 50204 FromWoocommerce
             SalesLineRecord.Type := "Sales Line Type".FromInteger(2);
             SalesLineRecord."Line No." := counter;
             wooCommerceIDTemporary := JsonConverter.getFileIdTextAsText(ArrayToken.AsObject(), 'product_id');
-            ItemTable.SetFilter(WoocommerceId, wooCommerceIDTemporary);
+            ItemTable.SetFilter(WooCommerceId, wooCommerceIDTemporary);
             ItemTable.FindFirst();
             SalesLineRecord."No." := ItemTable."No.";
             Evaluate(ValueQuantity, JsonConverter.getFileIdTextAsText(ArrayToken.AsObject(), 'quantity'));

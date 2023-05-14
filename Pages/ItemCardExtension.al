@@ -11,6 +11,14 @@ pageextension 50109 ItemCardExtension extends "Item Card"
                 MultiLine = true;
                 Width = 200;
             }
+
+            field(PhysicalOrWebshop; Rec.PhysicalOrWebshop)
+            {
+                Caption = 'Physical Shop or Webshop';
+                MultiLine = true;
+                Width = 200;
+            }
+
         }
     }
 
