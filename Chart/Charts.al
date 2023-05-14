@@ -1,4 +1,4 @@
-page 50090 "Chart"
+page 50340 "Chart"
 {
     PageType = Card;
     Caption = 'Product Chart';

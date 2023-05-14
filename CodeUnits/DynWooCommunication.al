@@ -304,7 +304,7 @@ codeunit 50204 FromWoocommerce
 
             counter += 1;
         end;
-        Email.NewOrderEmail(SalesHeaderRecord."No.");
+        //Email.NewOrderEmail(SalesHeaderRecord."No.");
     end;
 
 }
