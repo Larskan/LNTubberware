@@ -131,9 +131,9 @@ codeunit 50204 FromWoocommerce
         Email: Codeunit EmailDefinition; //Default emails
         JsonConverter: Codeunit JsonConverter; //Convert JSON to AL data
         MainJson: JsonObject; //Stored the main JSON
-        BillingJsonText: JsonToken; //
-        stringSplit: list of [text];
-        endtext: Text;
+        BillingJsonText: JsonToken; //Store the Billing JSON
+        stringSplit: list of [text];//Holds the results of splitting the payload string on avatar_url substring
+        endtext: Text;//Holds end of payload string after some cleaning
     begin
         //Replace \r\n and \ with an empty string to ensure payload string is properly formatted for parsing as JSON
         payload := payload.Replace('\r\n', '');
@@ -146,16 +146,22 @@ codeunit 50204 FromWoocommerce
         endtext := DelChr(stringSplit.Get(1), '>', ', "');
         //Adds the closing at the end, to make sure its valid syntax
         MainJson.ReadFrom(endtext + '}');
+
+        //Filters CustomerTable to match id from MainJson which represents the customer_id
         CustomerTable.SetFilter("No.", JsonConverter.getFileIdTextAsText(MainJson, 'id'));
 
         //If I cant find my Customer, it means they are new: Create them
         if not CustomerTable.FindSet() then begin
             CustomerTable.Init();
+            //Assign values to id, email and name in CustomerTable, based on the values from MainJSon
             CustomerTable."No." := JsonConverter.getFileIdTextAsText(MainJson, 'id');
             CustomerTable."E-Mail" := JsonConverter.getFileIdTextAsText(MainJson, 'email');
-            CustomerTable.Name := JsonConverter.getFileIdTextAsText(MainJson, 'first_name') + ' ' + JsonConverter.getFileIdTextAsText(MainJson, 'last_name');
+            CustomerTable.Name := JsonConverter.getFileIdTextAsText(MainJson, 'first_name')
+            + ' ' + JsonConverter.getFileIdTextAsText(MainJson, 'last_name');
 
+            ////Gets billing within MainJson and stores it in BillingJsonText
             MainJson.Get('billing', BillingJsonText);
+            //Assign the rest of the values based on BillingJsonText values
             CustomerTable.Address := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'address_1');
             CustomerTable.County := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'country'); //County is also a Country
             CustomerTable."Post Code" := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'postcode');
@@ -176,11 +182,15 @@ codeunit 50204 FromWoocommerce
 
             //Existing Customer
         end else begin
+            //Filter based on the id from MainJson payload and CustomerID
             CustomerTable.SetFilter("No.", JsonConverter.getFileIdTextAsText(MainJson, 'id'));
             CustomerTable.FindFirst();
+            //Updates the CustomerTable fields with new values from MainJson
             CustomerTable."E-Mail" := JsonConverter.getFileIdTextAsText(MainJson, 'email');
-            CustomerTable.Name := JsonConverter.getFileIdTextAsText(MainJson, 'first_name') + ' ' + JsonConverter.getFileIdTextAsText(MainJson, 'last_name');
+            CustomerTable.Name := JsonConverter.getFileIdTextAsText(MainJson, 'first_name')
+            + ' ' + JsonConverter.getFileIdTextAsText(MainJson, 'last_name');
 
+            //Update the billing related CustomerTable fields with new BillingJsonText values
             MainJson.Get('billing', BillingJsonText);
             CustomerTable.Address := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'address_1');
             CustomerTable.County := JsonConverter.getFileIdTextAsText(BillingJsonText.AsObject(), 'country');
@@ -194,7 +204,7 @@ codeunit 50204 FromWoocommerce
 
             CustomerTable.Modify();
         end;
-        result := true;
+        result := true; //Success
 
     end;
 
