@@ -1,3 +1,4 @@
+//Never got finished
 page 50402 ChartDynPage
 {
     ApplicationArea = All;
@@ -40,6 +41,7 @@ page 50402 ChartDynPage
                         ItemChart: Record ChartDyn;
                         Stuff: Record Item;
                         Token: JsonToken;
+                        dot: Record "Chart Definition";
                     begin
                         //if something with XValueString then begin ?? 
                         //Get needs a key and a token. XValueString is our ID's I assume

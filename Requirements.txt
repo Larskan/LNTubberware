@@ -13,10 +13,6 @@ DynamicsReq: Product name must be shown as a tooltip in Dynamics
 Req: Code snippets of interesting pieces of code, and text explaining the purpose
 Report:Technical description of solution and the decisions made. Max 20 pages
 
---- Lars Need Testing ---
-
---- Nico Need Testing ---
-
 ---------------------------------------------------------------------------------------------------------
 
 --- Completed ---

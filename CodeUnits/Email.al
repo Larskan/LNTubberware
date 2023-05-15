@@ -13,6 +13,7 @@ codeunit 50205 EmailDefinition
         Receiver: Text;
         Character: Char;
     begin
+        //Match CustomerTable No. with the customerId parameter
         CustomerTable.SetFilter("No.", customerId);
         CustomerTable.FindFirst();
         Receiver := CustomerTable."E-Mail";
@@ -23,7 +24,6 @@ codeunit 50205 EmailDefinition
 
         Body := 'Greetings ' + CustomerTable.Name + Format(Character) + Format(Character)
         + 'Welcome to EpicShop' + Format(Character)
-        + 'Hope you enjoy our shop and have a good experience' + Format(Character)
         + 'Best Regards' + Format(Character)
         + 'CEO of EpicShop';
 
@@ -48,9 +48,12 @@ codeunit 50205 EmailDefinition
         Receiver: Text;
         Character: Char;
     begin
+        //Filter on Sales Header record, to match Sales Header No. with the input orderId parameter
         OrderTable.SetFilter("No.", orderId);
         OrderTable.FindFirst();
+        //Filter on Sales Line Record to match document number of order within Sales Header record
         SalesLineTable.SetFilter("Document No.", OrderTable."No.");
+        //Filter on CustomerTable to match customerID found in Sales Header with the Sales Header
         CustomerTable.SetFilter("No.", OrderTable."Bill-to Customer No.");
         CustomerTable.FindFirst();
         Character := 13; //Line shift
@@ -58,20 +61,18 @@ codeunit 50205 EmailDefinition
 
         Subject := 'Thanks for shopping!';
 
-        Body := 'Greetings ' + CustomerTable.Name + Format(Character) + Format(Character)
-        + 'Thank you for shopping in EpicShop' + Format(Character)
-        + 'Your Order: ' + Format(Character);
+        Body := 'Greetings ' + CustomerTable.Name + Format(Character)
+        + 'Your Order is in: ' + Format(Character);
 
-        //Find all items within this order
+        //Searches Sales Line for all records that matches the filter from above
+        //Then loop through all products the costumer ordered
         if SalesLineTable.FindSet() then
             repeat
-                Body += 'Item: ' + SalesLineTable.Description
-                        + ' | Amount: ' + Format(SalesLineTable.Quantity)
-                        + ' | Price: ' + Format(SalesLineTable."Line Amount") + Format(Character);
+                Body += 'Item: ' + SalesLineTable.Description + ' | Item Amount: ' + Format(SalesLineTable.Quantity)
+                    + ' | Price: ' + Format(SalesLineTable."Line Amount") + Format(Character);
             until SalesLineTable.Next() = 0;
 
-        Body := 'Please come again!' + Format(Character)
-                + 'Best Regards' + Format(Character)
+        Body += 'Best Regards' + Format(Character)
                 + 'CEO of EpicShop';
 
         if not (Body = '') then begin
