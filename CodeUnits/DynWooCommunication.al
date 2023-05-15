@@ -234,7 +234,7 @@ codeunit 50204 FromWoocommerce
         //Gets billing within MainJson and stores it in CostJsonToken
         MainJson.Get('billing', CostJsonToken);
 
-        //Initiatiale and populate the JSON data based on MainJson and CustomerTable
+        //Initializes and populate the JSON data based on MainJson and CustomerTable
         SalesHeaderRecord.Init();
         //Set to Sales Document Type 1 = Sales Order
         SalesHeaderRecord."Document Type" := "Sales Document Type".FromInteger(1);
@@ -246,9 +246,8 @@ codeunit 50204 FromWoocommerce
         //FindFirst: Moves the focus to the first record that matches the filter
         CustomerTable.FindFirst();
         //Set Bill-to and Sell-to customer fields to values that match CustomerTable
-        SalesHeaderRecord."Bill-to Name" := CustomerTable.Name;
         SalesHeaderRecord."Bill-to Customer No." := CustomerTable."No.";
-        SalesHeaderRecord."Bill-to Name" := CustomerTable."Name";
+        SalesHeaderRecord."Bill-to Name" := CustomerTable.Name;
         SalesHeaderRecord."Sell-to Customer No." := CustomerTable."No.";
         SalesHeaderRecord."Sell-to Customer Name" := CustomerTable.Name;
         SalesHeaderRecord."Sell-to E-Mail" := CustomerTable."E-Mail";
